@@ -1,0 +1,318 @@
+account_map:
+  - from: accountId
+    to: account_id
+    type: str
+  - from: accountIdKey
+    to: account_key
+    type: str
+  - from: accountMode
+    to: mode
+    type: AccountMode
+  - from: accountDesc
+    to: description
+    type: str
+  - from: accountName
+    to: name
+    type: str
+  - from: accountType
+    to: acct_type
+    type: AccountType
+  - from: accountStatus
+    to: status
+    type: AccountStatus
+  - from: closedDate
+    to: closed_date
+    type: timestamp
+
+account_mode_map:
+  CASH: CASH
+  MARGIN: MARGIN
+
+account_type_map:
+  AMMCHK: AMMCHK
+  ARO: ARO
+  BCHK: BCHK
+  BENFIRA: BENFIRA
+  BENFROTHIRA: BENFROTHIRA
+  BENF_ESTATE_IRA: BENF_ESTATE_IRA
+  BENF_MINOR_IRA: BENF_MINOR_IRA
+  BENF_ROTH_ESTATE_IRA: BENF_ROTH_ESTATE_IRA
+  BENF_ROTH_MINOR_IRA: BENF_ROTH_MINOR_IRA
+  BENF_ROTH_TRUST_IRA: BENF_ROTH_TRUST_IRA
+  BENF_TRUST_IRA: BENF_TRUST_IRA
+  BROKER: BROKER
+  CASH: CASH
+  C_CORP: C_CORP
+  CONTRIBUTORY: CONTRIBUTORY
+  COVERDELL_ESA: COVERDELL_ESA
+  CONVERSION_ROTH_IRA: CONVERSION_ROTH_IRA
+  CREDITCARD: CREDITCARD
+  COMM_PROP: COMM_PROP
+  CONSERVATOR: CONSERVATOR
+  CORPORATION: CORPORATION
+  CSA: CSA
+  CUSTODIAL: CUSTODIAL
+  DVP: DVP
+  ESTATE: ESTATE
+  EMPCHK: EMPCHK
+  EMPMMCA: EMPMMCA
+  ETCHK: ETCHK
+  ETMMCHK: ETMMCHK
+  HEIL: HEIL
+  HELOC: HELOC
+  INDCHK: INDCHK
+  INDIVIDUAL: INDIVIDUAL
+  INDIVIDUAL_K: INDIVIDUAL_K
+  INVCLUB: INVCLUB
+  INVCLUB_C_CORP: INVCLUB_C_CORP
+  INVCLUB_LLC_C_CORP: INVCLUB_LLC_C_CORP
+  INVCLUB_LLC_PARTNERSHIP: INVCLUB_LLC_PARTNERSHIP
+  INVCLUB_LLC_S_CORP: INVCLUB_LLC_S_CORP
+  INVCLUB_PARTNERSHIP: INVCLUB_PARTNERSHIP
+  INVCLUB_S_CORP: INVCLUB_S_CORP
+  INVCLUB_TRUST: INVCLUB_TRUST
+  IRA_ROLLOVER: IRA_ROLLOVER
+  JOINT: JOINT
+  JTTEN: JTTEN
+  JTWROS: JTWROS
+  LLC_C_CORP: LLC_C_CORP
+  LLC_PARTNERSHIP: LLC_PARTNERSHIP
+  LLC_S_CORP: LLC_S_CORP
+  LLP: LLP
+  LLP_C_CORP: LLP_C_CORP
+  LLP_S_CORP: LLP_S_CORP
+  IRA: IRA
+  IRACD: IRACD
+  MONEY_PURCHASE: MONEY_PURCHASE
+  MARGIN: MARGIN
+  MRCHK: MRCHK
+  MUTUAL_FUND: MUTUAL_FUND
+  NONCUSTODIAL: NONCUSTODIAL
+  NON_PROFIT: NON_PROFIT
+  OTHER: OTHER
+  PARTNER: PARTNER
+  PARTNERSHIP: PARTNERSHIP
+  PARTNERSHIP_C_CORP: PARTNERSHIP_C_CORP
+  PARTNERSHIP_S_CORP: PARTNERSHIP_S_CORP
+  PDT_ACCOUNT: PDT_ACCOUNT
+  PM_ACCOUNT: PM_ACCOUNT
+  PREFCD: PREFCD
+  PREFIRACD: PREFIRACD
+  PROFIT_SHARING: PROFIT_SHARING
+  PROPRIETARY: PROPRIETARY
+  REGCD: REGCD
+  ROTHIRA: ROTHIRA
+  ROTH_INDIVIDUAL_K: ROTH_INDIVIDUAL_K
+  ROTH_IRA_MINORS: ROTH_IRA_MINORS
+  SARSEPIRA: SARSEPIRA
+  S_CORP: S_CORP
+  SEPIRA: SEPIRA
+  SIMPLE_IRA: SIMPLE_IRA
+  TIC: TIC
+  TRD_IRA_MINORS: TRD_IRA_MINORS
+  TRUST: TRUST
+  VARCD: VARCD
+  VARIRACD: VARIRACD
+
+account_status_map:
+  ACTIVE: ACTIVE
+  CLOSED: CLOSED
+
+
+equity_map:
+  - from: All.changeClose
+    to: change
+    type: float
+  - from: All.changeClosePercentage
+    to: change_percent
+    type: float
+  - from: All.previousClose
+    to: previous_close
+    type: float
+  - from: All.timeOfLastTrade
+    to: last_trade_time
+    type: timestamp
+  - from: All.week52LowDate
+    to: low_date
+    type: timestamp
+  - from: All.week52HighDate
+    to: high_date
+    type: timestamp
+  - from: All.high52
+    to: high52
+    type: float
+  - from: All.low52
+    to: low52
+    type: float
+  - from: All.lastTrade
+    to: last_trade
+    type: float
+  - from: All.primaryExchange
+    to: exchange_code
+    type: str
+  - from: All.ask
+    to: ask
+    type: float
+  - from: All.askSize
+    to: ask_size
+    type: int
+  - from: All.askTime
+    to: ask_time
+    type: datetime
+  - from: All.bid
+    to: bid
+    type: float
+  - from: All.bidExchange
+    to: bid_exchange
+    type: str
+  - from: All.bidSize
+    to: bid_size
+    type: int
+  - from: All.bidTime
+    to: bid_time
+    type: datetime
+  - from: All.dirLast
+    to: direction
+    type: int
+  - from: All.dividend
+    to: dividend
+    type: float
+  - from: All.eps
+    to: eps
+    type: float
+  - from: All.estEarnings
+    to: earnings
+    type: float
+  - from: All.exDividendDate
+    to: exdividend_date
+    type: timestamp
+  - from: All.high
+    to: high
+    type: float
+  - from: lAll.ow
+    to: low
+    type: float
+  - from: All.open
+    to: open_price
+    type: float
+  - from: All.openInterest
+    to: open_interest
+    type: int
+  - from: All.previousDayVolume
+    to: previous_volume
+    type: int
+  - from: All.totalVolume
+    to: volume
+    type: int
+  - from: All.cashDeliverable
+    to: cash_deliverable
+    type: float
+  - from: All.marketCap
+    to: market_cap
+    type: float
+  - from: All.sharesOutstanding
+    to: shares_outstanding
+    type: float
+  - from: All.nextEarningDate
+    to: earnings_date
+    type: datetime
+  - from: All.beta
+    to: beta
+    type: float
+  - from: All.yield
+    to: dividend_yield
+    type: float
+  - from: All.declaredDividend
+    to: declared_dividend
+    type: float
+  - from: All.dividendPayableDate
+    to: dividend_payable_date
+    type: timestamp
+  - from: All.pe
+    to: price_earnings
+    type: float
+  - from: All.averageVolume
+    to: avg_volume
+    type: int
+
+option_map:
+  - from: All.changeClose
+    to: change
+    type: float
+
+instrument_map:
+  - from: Product.symbol
+    to: symbol
+    type: str
+  - from: All.companyName
+    to: name
+    type: str
+  - from: MutualFund.fundName
+    to: name
+    type: str
+  - from: All.symbolDescription
+    to: description
+    type: str
+  - from: MutualFund.symbolDescription
+    to: description
+    type: str
+  - from: Product.securityType
+    to: inst_type
+    type: InstrumentType
+
+
+instrument_type_map:
+  EQ: EQUITY
+  OPTN: OPTION
+  MF: MUTUAL_FUND
+  BOND: BOND
+  INDX: OTHER
+  MMF: OTHER
+
+position_type_map:
+  LONG: LONG
+  SHORT: SHORT
+
+position_map:
+  - from: dateAcquired
+    to: date_aquired
+    type: timestamp
+  - from: pricePaid
+    to: avg_purchase_price
+    type: float
+  - from: commissions
+    to: commisions
+    type: float
+  - from: otherFees
+    to: fees
+    type: float
+  - from: costPerShare
+    to: avg_cost
+    type: float
+  - from: totalCost
+    to: total_cost
+    type: float
+  - from: marketValue
+    to: market_value
+    type: float
+  - from: quantity
+    to: quantity
+    type: float
+  - from: positionType
+    to: position_type
+    type: PositionType
+  - from: daysGain
+    to: days_gain
+    type: float
+  - from: daysGainPct
+    to: days_gain_pct
+    type: float
+  - from: totalGain
+    to: total_gain
+    type: float
+  - from: totalGainPct
+    to: total_gain_pct
+    type: float
+  - from: pctOfPortfolio
+    to: pct_of_portfolio
+    type: float
