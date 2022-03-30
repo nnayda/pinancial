@@ -1,0 +1,19 @@
+[BASIC]
+good-names=db,df,id
+
+[MASTER]
+jobs=4
+
+[MESSAGES CONTROL]
+disable=duplicate-doce,expression-not-assigned,import-error,no-member,no-name-in-module,pointless-statement,too-few-public-methods
+
+[SIMILARITIES]
+min-similarity-lines=4
+ignore-comments=yes
+ignore-docstrings=yes
+ignore-imports=yes
+
+[DESIGN]
+max-args=50
+max-attributes=50
+max-locals=50
