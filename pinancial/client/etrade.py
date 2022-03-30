@@ -29,11 +29,11 @@ class EtradeClient(Client):
         super().__init__(consumer_key, consumer_secret)
         self.base_url = "https://api.etrade.com"
         self.session = None
-        self._oauth: OAuth1Service = OAuth1Service(
+        self._oauth: OAuth1Service = OAuth1Service( # nosec
             name="etrade",
             consumer_key=consumer_key,
             consumer_secret=consumer_secret,
-            request_token_url="https://api.etrade.com/oauth/request_token", # nosec
+            request_token_url="https://api.etrade.com/oauth/request_token",
             access_token_url="https://api.etrade.com/oauth/access_token",
             authorize_url="https://us.etrade.com/e/t/etws/authorize?key={}&token={}",
             base_url=self.base_url,
