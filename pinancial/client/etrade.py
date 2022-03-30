@@ -33,7 +33,7 @@ class EtradeClient(Client):
             name="etrade",
             consumer_key=consumer_key,
             consumer_secret=consumer_secret,
-            request_token_url="https://api.etrade.com/oauth/request_token",
+            request_token_url="https://api.etrade.com/oauth/request_token", # nosec
             access_token_url="https://api.etrade.com/oauth/access_token",
             authorize_url="https://us.etrade.com/e/t/etws/authorize?key={}&token={}",
             base_url=self.base_url,
