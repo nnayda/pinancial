@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: install
-        run: pip3 install black==21.5b1
+        run: pip3 install black==22.3.0
 
       - name: test
         run: python3 -m black . --check --diff --exclude ".ipynb_checkpoints|.ipynb"
