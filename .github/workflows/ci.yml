@@ -4,7 +4,7 @@ on:
   pull_request: {}
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   black:
@@ -19,11 +19,11 @@ jobs:
         run: pip3 install black==21.5b1
 
       - name: test
-        run: python3 -m black . --exclude ".ipynb_checkpoints|.ipynb"
+        run: python3 -m black . --check --diff --exclude ".ipynb_checkpoints|.ipynb"
 
   pylint:
     name: pylint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
       - name: checkout
@@ -36,7 +36,7 @@ jobs:
         run: pip3 install pylint==2.8.2
 
       - name: test
-        run: python3 -m pylint --rcfile python-linter/.pylintrc
+        run: find . -name "*.py" | xargs python3 -m pylint --rcfile python-linter/.pylintrc
 
   mypy:
     name: mypy
