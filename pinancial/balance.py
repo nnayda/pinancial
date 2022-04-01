@@ -20,3 +20,13 @@ class Balance:
         self.invested = invested
         self.margin = margin
         self.as_of_date = as_of_date
+
+    def __str__(self) -> str:
+        return f"{self.market_value}"
+
+    def __repr__(self) -> str:
+        return self.__str__()
+
+    def to_dict(self) -> dict:
+        """Return details as dict."""
+        return vars(self)
