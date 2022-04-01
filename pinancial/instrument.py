@@ -34,3 +34,13 @@ class Instrument:
         self.name = name
         # The type of instrument
         self.inst_type = inst_type
+
+    def __str__(self) -> str:
+        return f"{self.symbol}"
+
+    def __repr__(self) -> str:
+        return self.__str__()
+
+    def to_dict(self) -> dict:
+        """Return details as dict."""
+        return vars(self)

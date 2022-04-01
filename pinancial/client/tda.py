@@ -1,7 +1,9 @@
-"""Etrade client."""
+'''TD Ameritrade client."""
+
 from __future__ import annotations
 from pathlib import Path
-from rauth import OAuth1Service
+from authlib.integrations.httpx_client import AsyncOAuth2Client, OAuth2Client
+from tda import auth, client
 from pinancial.exceptions import (
     Error400,
     Error401,
@@ -18,31 +20,26 @@ from pinancial.position import Position
 from pinancial.utils import get_settings
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SETTINGS = get_settings(BASE_DIR / "config" / "etrade.yaml")
+SETTINGS = get_settings(BASE_DIR / "config" / "tda.yaml")
 
 
-class EtradeClient(Client):
-    """Etrade api client"""
+class TDAClient(Client):
+    """TD Ameritrade api client"""
 
     def __init__(self, consumer_key: str, consumer_secret: str):
         """Constructor"""
         super().__init__(consumer_key, consumer_secret)
         self.base_url = "https://api.etrade.com"
         self.session = None
-        self._oauth: OAuth1Service = OAuth1Service(  # nosec
-            name="etrade",
-            consumer_key=consumer_key,
-            consumer_secret=consumer_secret,
-            request_token_url="https://api.etrade.com/oauth/request_token",
-            access_token_url="https://api.etrade.com/oauth/access_token",
-            authorize_url="https://us.etrade.com/e/t/etws/authorize?key={}&token={}",
-            base_url=self.base_url,
+        self._oauth: OAuth2Client = OAuth2Client(  # nosec
+            consumer_key,
+            #redirect_uri=
         )
         self.request_token, self.request_token_secret = self._oauth.get_request_token(
             params={"oauth_callback": "oob", "format": "json"}
         )
-        self.authorize_url = self._oauth.authorize_url.format(
-            self.consumer_key, self.request_token
+        self.authorize_url, _ = self._oauth.create_authorization_url(
+            "https://auth.tdameritrade.com/auth"
         )
         self.account_map = SETTINGS["account_map"]
         self.accountmode_map = SETTINGS["account_mode_map"]
@@ -55,27 +52,35 @@ class EtradeClient(Client):
         self.positiontype_map = SETTINGS["position_type_map"]
         self.name = "E*Trade"
 
+    def get_session(self) -> None:
+        """Setup the client session."""
+        try:
+            print("trying to create client")
+            self.session = auth.client_from_token_file(self._token_path, self.consumer_key)
+        except FileNotFoundError:
+            print("token file not found")
+
+    def initialize(self, request) -> None:
+        """Initialize the token file."""
+        self._token_path = f"env/{str(uuid.uuid4())}.env"
+        request_url = request.build_absolute_uri()
+        self.client = _create_tda_token(
+            self.oauth, request_url, self._api_key, self._token_path
+        )
+        self._load_accounts()
+
     def get_accounts(self) -> list[Account]:
         """Get all accounts."""
         parsed_accounts = []
-        response = self.session.get(
-            self.base_url + "/v1/accounts/list.json", header_auth=True
+        response = self.session.get_accounts(
+            fields=client.Client.Account.Fields.POSITIONS
         )
         # Parse response
         if response is not None and response.status_code == 200:
             data = response.json()
-            if (
-                data is not None
-                and "AccountListResponse" in data
-                and "Accounts" in data["AccountListResponse"]
-                and "Account" in data["AccountListResponse"]["Accounts"]
-            ):
-                accounts = data["AccountListResponse"]["Accounts"]["Account"]
-                accounts[:] = [
-                    d for d in accounts if d.get("accountStatus") != "CLOSED"
-                ]
-                for account in accounts:
-                    parsed_account = self._parse_account(account)
+            if (data is not None):
+                for account in data:
+                    parsed_account = self._parse_account(account["securitiesAccount"])
                     if parsed_account:
                         parsed_accounts.append(parsed_account)
 
@@ -172,3 +177,4 @@ def _handle_errors(response: dict) -> None:
         if response.status_code == 423:
             raise Error423(response.json()["Error"]["message"])
     raise Error500("AccountList API service error")
+'''

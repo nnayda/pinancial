@@ -66,3 +66,13 @@ class Position:
         self.total_gain_pct = total_gain_pct
         # Percentage of portfolio
         self.pct_of_portfolio = pct_of_portfolio
+
+    def __str__(self) -> str:
+        return f"{self.instrument}: {self.market_value}"
+
+    def __repr__(self) -> str:
+        return self.__str__()
+
+    def to_dict(self) -> dict:
+        """Return details as dict."""
+        return vars(self)

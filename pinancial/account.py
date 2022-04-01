@@ -119,6 +119,7 @@ class Account:
         name: str = "",
         acct_type: AccountType = AccountType.OTHER,
         status: AccountStatus = AccountStatus.ACTIVE,
+        institution: str = "",
         opened_date: date = None,
         closed_date: date = None,
     ):
@@ -130,5 +131,16 @@ class Account:
         self.name = name
         self.acct_type = acct_type
         self.status = status
+        self.institution = institution
         self.opened_date = opened_date
         self.closed_date = closed_date
+
+    def __str__(self) -> str:
+        return f"{self.institution}: {self.name}"
+
+    def __repr__(self) -> str:
+        return self.__str__()
+
+    def to_dict(self) -> dict:
+        """Return details as dict."""
+        return vars(self)

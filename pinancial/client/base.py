@@ -37,6 +37,7 @@ class Client(ABC):
         self.positiontype_map: list = []
         self.position_map: list = []
         self.session = None
+        self.name: str = ""
 
     def get_session(self, text_code: str = "") -> None:
         """Setup an auth session."""
@@ -69,6 +70,7 @@ class Client(ABC):
                 details[item["to"]] = val
 
         if len(details) > 0:
+            details["institution"] = self.name
             return Account(**details)
 
         return None

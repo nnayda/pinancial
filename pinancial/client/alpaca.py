@@ -28,6 +28,7 @@ class AlpacaClient(Client):
         # self.instrument_map = SETTINGS["instrument_map"]
         # self.instrumenttype_map = SETTINGS["instrument_type_map"]
         # self.equity_map = SETTINGS["equity_map"]
+        self.name = "Alpaca"
 
     def get_accounts(self) -> list[Account]:
         """Get all accounts."""
