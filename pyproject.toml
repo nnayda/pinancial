@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pinancial"
+version = "0.0.1"
+authors = [
+  { name="Nathan Nayda", email="ntnayda@gmail.com" },
+]
+description = "API wrapper for financial services."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/nnayda/pinancial"
+"Bug Tracker" = "https://github.com/nnayda/pinancial/issues"

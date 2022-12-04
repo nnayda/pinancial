@@ -1,0 +1,81 @@
+name: ci
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - develop
+
+jobs:
+  black:
+    name: black
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: install
+        run: pip3 install black==22.3.0
+
+      - name: test
+        run: python3 -m black . --check --diff --exclude ".ipynb_checkpoints|.ipynb"
+
+  pylint:
+    name: pylint
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: install os dependencies
+        run: sudo apt-get install python3-setuptools
+
+      - name: install
+        run: pip3 install pylint==2.8.2
+
+      - name: test
+        run: find . -name "*.py" | xargs python3 -m pylint --rcfile python-linter/.pylintrc
+
+  mypy:
+    name: mypy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: install
+        run: pip3 install mypy==0.812
+
+      - name: test
+        run: python3 -m mypy --config-file python-linter/mypy.ini .
+
+  yamllint:
+    name: yamllint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: install
+        run: pip3 install yamllint==1.26.1
+
+      - name: test
+        run: python3 -m yamllint -c python-linter/yamllint.yml .
+
+  bandit:
+    name: bandit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: install
+        run: pip3 install bandit==1.7.0
+
+      - name: test
+        run: python3 -m bandit --exclude "./venv" --recursive --quiet .
