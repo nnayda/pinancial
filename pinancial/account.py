@@ -4,6 +4,7 @@ from enum import Enum
 from datetime import date
 
 from .broker import Broker
+from .balance import Balance
 
 class AccountStatus(Enum):
     """Status of the account."""
@@ -26,6 +27,8 @@ class Account:
         status: AccountStatus = AccountStatus.ACTIVE,
         opened_date: date = None,
         closed_date: date = None,
+        is_day_trader: bool = False,
+        is_closing_only_restricted: bool = False,
     ):
         """Constructor"""
         self.account_id = account_id
@@ -37,24 +40,15 @@ class Account:
         self.status = status
         self.opened_date = opened_date
         self.closed_date = closed_date
+        self.is_day_trader = is_day_trader
+        self.is_closing_only_restricted = is_closing_only_restricted
+
+        self.balance: Balance = None
 
     def __str__(self) -> str:
+        """String representation"""
         return f"<Account: {self.account_id}>"
 
     def __repr__(self) -> str:
+        """String representation"""
         return self.__str__()
-
-
-class InvestmentAccount(Account):
-    """Investment Account"""
-
-    def __init__(
-        self,
-        is_day_trader: bool = False,
-        is_closing_only_restricted: bool = False,
-        **kwargs: dict,
-    ):
-        """Constructor"""
-        super().__init__(**kwargs)
-        self.is_day_trader = is_day_trader
-        self.is_closing_only_restricted = is_closing_only_restricted
